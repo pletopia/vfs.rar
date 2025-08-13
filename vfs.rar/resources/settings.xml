@@ -3,6 +3,10 @@
   <section id="vfs.rar">
     <category id="general" label="30010">
       <group id="1">
+        <setting id="unpack_compressed" type="boolean" label="30025" help="30026">
+          <default>true</default>
+          <control type="toggle"/>
+        </setting>
         <setting id="asks_to_unpack" type="boolean" label="30023" help="30024">
           <default>true</default>
           <control type="toggle"/>

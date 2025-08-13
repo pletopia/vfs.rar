@@ -54,6 +54,7 @@ CRarManager& CRarManager::Get()
 CRarManager::CRarManager()
 {
   // Load the current settings and store to reduce call amount of them
+  m_unpackCompressed = kodi::addon::GetSettingBoolean("unpack_compressed");
   m_asksToUnpack = kodi::addon::GetSettingBoolean("asks_to_unpack");
   m_passwordAskAllowed = kodi::addon::GetSettingBoolean("usercheck_for_password");
   for (unsigned int i = 0; i < MAX_STANDARD_PASSWORDS; ++i)
@@ -71,6 +72,8 @@ void CRarManager::SettingsUpdate(const std::string& settingName, const kodi::add
   // addon settings by e.g. user.
   if (settingName == "asks_to_unpack")
     m_asksToUnpack = settingValue.GetBoolean();
+  else if (settingName == "unpack_compressed")
+    m_unpackCompressed = settingValue.GetBoolean();
   else if (settingName == "usercheck_for_password")
     m_passwordAskAllowed = settingValue.GetBoolean();
   else if (settingName == "standard_password_1")
