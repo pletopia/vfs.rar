@@ -113,3 +113,11 @@ msgstr ""
 msgctxt "#30024"
 msgid "Asks you with a dialog to confirm the unpacking of a larger file."
 msgstr ""
+
+msgctxt "#30025"
+msgid "Unpack compressed"
+msgstr ""
+
+msgctxt "#30026"
+msgid "Disable to avoid unpacking compressed rar archives."
+msgstr ""
