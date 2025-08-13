@@ -60,6 +60,7 @@ public:
   void ExtractArchive(const std::string& strArchive, const std::string& strPath);
 
   void SettingsUpdate(const std::string& settingName, const kodi::addon::CSettingValue& settingValue);
+  bool UnpackCompressed() const { return m_unpackCompressed; }
   bool PasswordAskAllowed() const { return m_passwordAskAllowed; }
   const std::string& StandardPassword(int no) { return m_standardPasswords[no]; }
 

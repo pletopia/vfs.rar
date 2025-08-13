@@ -66,7 +66,7 @@ kodi::addon::VFSFileHandle CRARFile::Open(const kodi::addon::VFSUrl& url)
   }
   else
   {
-    if (!CRarManager::Get().m_unpackCompressed)
+    if (!CRarManager::Get().UnpackCompressed())
     {
       delete result;
       return nullptr;
