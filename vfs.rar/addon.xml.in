@@ -22,6 +22,7 @@
       <icon>resources/icon.png</icon>
       <fanart>resources/fanart.jpg</fanart>
     </assets>
+    <summary lang="bs_BA">Raspakivač za .rar datoteke</summary>
     <summary lang="ca_ES">Desarxivador per fitxers .rar</summary>
     <summary lang="de_DE">Entpacker für Rar-Dateien</summary>
     <summary lang="en_GB">Unarchiver for .rar files</summary>
@@ -41,6 +42,7 @@
     <summary lang="ru_RU">Распаковщик для архивов .rar</summary>
     <summary lang="sv_SE">Uppackare för .rar-filer</summary>
     <summary lang="zh_CN">解压 .rar 文件</summary>
+    <description lang="bs_BA">Ovaj dodatak je uslužni program za raspakivanje RAR arhiva.[CR][CR]Omogućava direktno čitanje nekomprimiranih RAR datoteka, tako da prethodno raspakivanje nije potrebno. Za sve ostale tipove, privremeno se raspakuje i prosljeđuje Kodiju.[CR][CR]Pažnja: Tip arhive &quot;Solid RAR&quot; zahtijeva potpuno raspakiranje da bi se koristile datoteke unutar nje. Stoga vrijeme pristupa može biti dugo za veće pakete.</description>
     <description lang="ca_ES">Aquest complement és una utilitat d&apos;extracció per a arxius RAR.[CR][CR]Permet la lectura directa de fitxers RAR sense comprimir, de manera que no és necessari desempaquetar prèviament. Per a la resta de tipus, es desempaqueta temporalment i es passa a Kodi.[CR][CR]Atenció: el tipus d&apos;arxiu &quot;RAR sòlid&quot; requereix descomprimir completament per utilitzar els fitxers. Per tant, els temps d&apos;accés poden ser llargs pels paquets més grans.</description>
     <description lang="de_DE">Dieses Addon dient zum Entpacken von RAR-Archiven.[CR][CR]Es ermöglicht das direkte Lesen nicht komprimierter RAR-Dateien, sodass ein vorheriges Entpacken nicht erforderlich ist. Bei allen anderen Typen wird der Inhalt temporär entpackt und an Kodi übertragen.[CR][CR]Achtung: Der Archivtyp „Solid RAR“ erfordert ein vollständiges Entpacken, um die darin enthaltenen Dateien zu verwenden. Daher können die Zugriffszeiten für größere Pakete länger sein.</description>
     <description lang="en_GB">This addon is an extraction utility for RAR archives.[CR][CR]It allows direct reading of uncompressed RAR files, so prior unpacking is not necessary. For all other types, it is temporarily unpacked and passed to Kodi.[CR][CR]Attention: A &quot;Solid RAR&quot; archive type requires complete unpacking to use files within it. Hence access times may be long for larger packages.</description>
