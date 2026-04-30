@@ -307,6 +307,7 @@ int CRARControl::ArchiveExtract(const std::string& targetPath, const std::string
 
       RarErrorLog(__func__, result);
       retValue = 0;
+      RARCloseArchive(archive);
       continue;
     }
     else if ((needPassword && currentPw != m_password) || m_passwordSeemsBad)
@@ -518,6 +519,7 @@ RARContext::RARContext(const kodi::addon::VFSUrl& url)
 
 RARContext::~RARContext()
 {
+  CleanUp();
   if (m_file)
     delete m_file;
   delete m_buffer;
@@ -740,18 +742,28 @@ void RARContext::CleanUp()
   {
     if (m_extract_thread)
     {
-      if (m_extract_thread->hRunning.Wait(1))
-      {
-        m_extract.GetDataIO().hQuit->Broadcast();
-        while (m_extract_thread->hRunning.Wait(1))
-          std::this_thread::sleep_for(std::chrono::milliseconds(1));
-      }
+      m_extract.GetDataIO().hQuit->Broadcast();
+      while (m_extract_thread->hRunning.Wait(1))
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+
       delete m_extract.GetDataIO().hBufferFilled;
+      m_extract.GetDataIO().hBufferFilled = nullptr;
       delete m_extract.GetDataIO().hBufferEmpty;
+      m_extract.GetDataIO().hBufferEmpty = nullptr;
       delete m_extract.GetDataIO().hSeek;
+      m_extract.GetDataIO().hSeek = nullptr;
       delete m_extract.GetDataIO().hSeekDone;
+      m_extract.GetDataIO().hSeekDone = nullptr;
       delete m_extract.GetDataIO().hQuit;
+      m_extract.GetDataIO().hQuit = nullptr;
+
+      delete m_extract_thread;
+      m_extract_thread = nullptr;
     }
+
+    // Ensure archive descriptors are released immediately on Close().
+    if (m_arc.IsOpened())
+      m_arc.Close();
   }
   catch (int rarErrCode)
   {
