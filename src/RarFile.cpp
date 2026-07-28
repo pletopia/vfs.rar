@@ -36,8 +36,15 @@ kodi::addon::VFSFileHandle CRARFile::Open(const kodi::addon::VFSUrl& url)
   RARContext* result = new RARContext(url);
 
   kodi::vfs::CDirEntry item;
-  if (CRarManager::Get().GetFileInRar(result->GetPath(), result->m_pathinrar, item) &&
-      item.GetProperties().size() == 1 && std::stoi(item.GetProperties().begin()->second) == 0x30)
+  if (!CRarManager::Get().GetFileInRar(result->GetPath(), result->m_pathinrar, item))
+  {
+    // Not an actual file inside the archive (e.g. the archive root itself, as
+    // probed by CFile::Stat()/Exists() before a directory listing).
+    delete result;
+    return nullptr;
+  }
+
+  if (item.GetProperties().size() == 1 && std::stoi(item.GetProperties().begin()->second) == 0x30)
   {
     if (!result->OpenInArchive())
     {
