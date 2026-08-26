@@ -18,8 +18,8 @@ jobs:
           path: xbmc
           fetch-depth: 1
 
-      # NOTE: this must land in a folder literally named "vfs.rar" inside an
-      # "addons-src" parent, because Kodi's build_addon macro looks for
+      # Must land in a folder literally named "vfs.rar" inside an "addons-src"
+      # parent, because Kodi's build_addon macro looks for
       # <ADDON_SRC_PREFIX>/<addon-id>/CMakeLists.txt
       - name: Checkout this vfs.rar fork (with the fix applied)
         uses: actions/checkout@v4
@@ -40,10 +40,10 @@ jobs:
           cmake -G "NMake Makefiles" ^
             -DCMAKE_BUILD_TYPE=Release ^
             -DADDONS_TO_BUILD=vfs.rar ^
-            -DADDON_SRC_PREFIX=%GITHUB_WORKSPACE%\addons-src ^
-            -DCMAKE_INSTALL_PREFIX=%GITHUB_WORKSPACE%\xbmc\kodi-build\addons ^
+            -DADDON_SRC_PREFIX=../addons-src ^
+            -DCMAKE_INSTALL_PREFIX=../xbmc/kodi-build/addons ^
             -DPACKAGE_ZIP=1 ^
-            %GITHUB_WORKSPACE%\xbmc\cmake\addons
+            ../xbmc/cmake/addons
 
       - name: Build
         shell: cmd
