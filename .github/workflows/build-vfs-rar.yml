@@ -1,7 +1,7 @@
 name: Build vfs.rar (Windows)
 
 on:
-  workflow_dispatch:   # lets you trigger it manually from the Actions tab
+  workflow_dispatch:
   push:
     branches: [ stored-fix ]
 
@@ -24,15 +24,20 @@ jobs:
           path: vfs.rar
           fetch-depth: 1
 
+      - name: Set up MSVC developer environment
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+
       - name: Configure
         shell: cmd
         run: |
           mkdir vfs.rar\build
           cd vfs.rar\build
-          cmake -G "Visual Studio 17 2022" -A x64 ^
+          cmake -G "NMake Makefiles" ^
+            -DCMAKE_BUILD_TYPE=Release ^
             -DADDONS_TO_BUILD=vfs.rar ^
             -DADDON_SRC_PREFIX=.. ^
-            -DCMAKE_BUILD_TYPE=Release ^
             -DCMAKE_INSTALL_PREFIX=..\..\xbmc\kodi-build\addons ^
             -DPACKAGE_ZIP=1 ^
             ..\..\xbmc\cmake\addons
@@ -41,7 +46,7 @@ jobs:
         shell: cmd
         run: |
           cd vfs.rar\build
-          cmake --build . --config Release
+          cmake --build .
 
       - name: Locate build output (debug helper — lists what actually got produced)
         shell: cmd
