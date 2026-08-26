@@ -37,7 +37,7 @@ kodi::addon::VFSFileHandle CRARFile::Open(const kodi::addon::VFSUrl& url)
 
   kodi::vfs::CDirEntry item;
   if (CRarManager::Get().GetFileInRar(result->GetPath(), result->m_pathinrar, item) &&
-      item.GetProperties().size() == 1 && std::stoi(item.GetProperties().begin()->second) == 0x30)
+      item.GetProperties().size() == 1 && std::stoi(item.GetProperties().begin()->second) == 0)
   {
     if (!result->OpenInArchive())
     {
