@@ -27,6 +27,15 @@ jobs:
           path: addons-src/vfs.rar
           fetch-depth: 1
 
+      # windows-latest ships CMake 4.x, which refuses to configure very old
+      # projects (like the tinyxml dependency Kodi's build pulls in) that
+      # declare cmake_minimum_required below 3.5. Pin the last 3.x release,
+      # which still supports them, ahead of the pre-installed one on PATH.
+      - name: Pin CMake 3.31.x (for legacy dependency compatibility)
+        uses: jwlawson/actions-setup-cmake@v2
+        with:
+          cmake-version: '3.31.6'
+
       - name: Set up MSVC developer environment
         uses: ilammy/msvc-dev-cmd@v1
         with:
