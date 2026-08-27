@@ -31,6 +31,10 @@
 
 #define SEEKTIMOUT 30000
 
+kodi::addon::VFSFileHandle CRARFile::Open(const kodi::addon::VFSUrl& url)
+{
+  RARContext* result = new RARContext(url);
+
   kodi::vfs::CDirEntry item;
   bool foundEntry = CRarManager::Get().GetFileInRar(result->GetPath(), result->m_pathinrar, item);
   int propCount = (int)item.GetProperties().size();
