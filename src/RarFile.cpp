@@ -31,13 +31,19 @@
 
 #define SEEKTIMOUT 30000
 
-kodi::addon::VFSFileHandle CRARFile::Open(const kodi::addon::VFSUrl& url)
-{
-  RARContext* result = new RARContext(url);
-
   kodi::vfs::CDirEntry item;
-  if (CRarManager::Get().GetFileInRar(result->GetPath(), result->m_pathinrar, item) &&
-      item.GetProperties().size() == 1 && std::stoi(item.GetProperties().begin()->second) == 0)
+  bool foundEntry = CRarManager::Get().GetFileInRar(result->GetPath(), result->m_pathinrar, item);
+  int propCount = (int)item.GetProperties().size();
+  int methodVal = -999;
+  if (propCount >= 1)
+  {
+    try { methodVal = std::stoi(item.GetProperties().begin()->second); }
+    catch (...) { methodVal = -998; }
+  }
+  kodiLog(ADDON_LOG_INFO, "CRARFile::Open DIAG path='%s' inrar='%s' found=%d propCount=%d methodVal=%d",
+          result->GetPath().c_str(), result->m_pathinrar.c_str(), foundEntry ? 1 : 0, propCount, methodVal);
+  if (foundEntry &&
+      item.GetProperties().size() == 1 && std::stoi(item.GetProperties().begin()->second) == 0x30)
   {
     if (!result->OpenInArchive())
     {
